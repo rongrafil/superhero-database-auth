@@ -1,0 +1,17 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "index" : "powers-index",
+    "query" : {
+      "expression": "powers = :powers",
+        "expressionValues" : {
+          ":powers" : $util.dynamodb.toDynamoDBJson($context.arguments.powers)
+        }
+    }
+    #if( ${context.arguments.count} )
+        ,"limit": $util.toJson($context.arguments.count)
+    #end
+    #if( ${context.arguments.nextToken} )
+        ,"nextToken": "${context.arguments.nextToken}"
+    #end
+}

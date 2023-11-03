@@ -25,23 +25,23 @@ function Index() {
 
     return (
         <Layout>
-            <h1>Users</h1>
-            <Link href="/users/add" className="btn btn-sm btn-success mb-2">Add User</Link>
+            <h1>Heroes</h1>
+            <Link href="/users/add" className="btn btn-sm btn-success mb-2">Add Hero</Link>
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th style={{ width: '30%' }}>First Name</th>
-                        <th style={{ width: '30%' }}>Last Name</th>
-                        <th style={{ width: '30%' }}>Username</th>
+                        <th style={{ width: '30%' }}>Hero Name</th>
+                        <th style={{ width: '30%' }}>Powers</th>
+                        <th style={{ width: '30%' }}>Backstory</th>
                         <th style={{ width: '10%' }}></th>
                     </tr>
                 </thead>
                 <tbody>
                     {users && users.map(user =>
                         <tr key={user.id}>
-                            <td>{user.firstName}</td>
-                            <td>{user.lastName}</td>
-                            <td>{user.username}</td>
+                            <td>{user.hero_name}</td>
+                            <td>{user.powers}</td>
+                            <td>{user.backstory}</td>
                             <td style={{ whiteSpace: 'nowrap' }}>
                                 <Link href={`/users/edit/${user.id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
                                 <button onClick={() => deleteUser(user.id)} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
@@ -63,7 +63,7 @@ function Index() {
                     {users && !users.length &&
                         <tr>
                             <td colSpan="4" className="text-center">
-                                <div className="p-2">No Users To Display</div>
+                                <div className="p-2">No Heroes To Display</div>
                             </td>
                         </tr>
                     }

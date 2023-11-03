@@ -1,0 +1,17 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "Query",
+    "index" : "hero_name-index",
+    "query" : {
+      "expression": "hero_name = :hero_name",
+        "expressionValues" : {
+          ":hero_name" : $util.dynamodb.toDynamoDBJson($context.arguments.hero_name)
+        }
+    }
+    #if( ${context.arguments.count} )
+        ,"limit": $util.toJson($context.arguments.count)
+    #end
+    #if( ${context.arguments.nextToken} )
+        ,"nextToken": "${context.arguments.nextToken}"
+    #end
+}

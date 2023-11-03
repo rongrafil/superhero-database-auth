@@ -7,7 +7,13 @@ import 'styles/globals.css';
 import { userService } from 'services';
 import { Nav, Alert } from 'components';
 
+import { Amplify } from "aws-amplify";
+import awsExports from "../src/aws-exports";
+
 export default App;
+
+//update
+Amplify.configure({ ...awsExports, ssr: true });
 
 function App({ Component, pageProps }) {
     const router = useRouter();
@@ -37,8 +43,9 @@ function App({ Component, pageProps }) {
     function authCheck(url) {
         // redirect to login page if accessing a private page and not logged in 
         setUser(userService.userValue);
-        const publicPaths = ['/account/login', '/account/register'];
+        const publicPaths = ['/account/login', '/account/register', '/account/confirm'];
         const path = url.split('?')[0];
+
         if (!userService.userValue && !publicPaths.includes(path)) {
             setAuthorized(false);
             router.push({

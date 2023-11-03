@@ -1,0 +1,34 @@
+type Hero {
+	id: ID!
+	hero_name: String
+	powers: String
+	backstory: String
+}
+
+type PaginatedHeroes {
+	heroes: [Hero!]!
+	nextToken: String
+}
+
+type Mutation {
+	deleteHero(id: ID!): Hero
+	updateHero(
+		id: ID!,
+		hero_name: String,
+		powers: String,
+		backstory: String
+	): Hero
+	addHero(hero_name: String!, powers: String, backstory: String): Hero!
+}
+
+type Query {
+	allHeroesByHeroName(hero_name: String!, count: Int, nextToken: String): PaginatedHeroes!
+	allHeroesByPowers(powers: String!, count: Int, nextToken: String): PaginatedHeroes!
+	allHeroes(count: Int, nextToken: String): PaginatedHeroes!
+	getHero(id: String): Hero
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}

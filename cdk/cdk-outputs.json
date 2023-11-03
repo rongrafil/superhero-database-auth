@@ -1,0 +1,6 @@
+{
+  "CdkStack": {
+    "GraphQLAPIEndpoint": "https://sk3kfokz2fdvlfveilw4wxslmy.appsync-api.ap-southeast-2.amazonaws.com/graphql",
+    "GraphQLAPIKey": "da2-lzzc6gtgqrcozm67o2i672la7u"
+  }
+}

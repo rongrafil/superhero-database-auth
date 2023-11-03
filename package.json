@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^2.7.1",
+        "aws-amplify": "^5.3.11",
         "bcryptjs": "^2.4.3",
         "express-jwt": "^6.1.0",
         "jsonwebtoken": "^8.5.1",

@@ -15,22 +15,26 @@ function AddEdit(props) {
     
     // form validation rules 
     const validationSchema = Yup.object().shape({
-        firstName: Yup.string()
+        heroName: Yup.string()
             .required('First Name is required'),
-        lastName: Yup.string()
+        powers: Yup.string()
             .required('Last Name is required'),
-        username: Yup.string()
+        backstory: Yup.string()
             .required('Username is required'),
-        password: Yup.string()
-            .transform(x => x === '' ? undefined : x)
-            .concat(isAddMode ? Yup.string().required('Password is required') : null)
-            .min(6, 'Password must be at least 6 characters')
+        // password: Yup.string()
+        //     .transform(x => x === '' ? undefined : x)
+        //     .concat(isAddMode ? Yup.string().required('Password is required') : null)
+        //     .min(6, 'Password must be at least 6 characters')
     });
     const formOptions = { resolver: yupResolver(validationSchema) };
 
     // set default form values if in edit mode
     if (!isAddMode) {
-        formOptions.defaultValues = props.user;
+        //change hero_name key name to avoid referencing issues
+        const { hero_name, ...defaultHero } = props.user;
+        defaultHero.heroName = hero_name;
+
+        formOptions.defaultValues = defaultHero;
     }
 
     // get functions to build form with useForm() hook
@@ -44,7 +48,7 @@ function AddEdit(props) {
     }
 
     function createUser(data) {
-        return userService.register(data)
+        return userService.add(data)
             .then(() => {
                 alertService.success('User added', { keepAfterRouteChange: true });
                 router.push('.');
@@ -65,30 +69,30 @@ function AddEdit(props) {
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-row">
                 <div className="form-group col">
-                    <label>First Name</label>
-                    <input name="firstName" type="text" {...register('firstName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
+                    <label>Hero Name</label>
+                    <input name="heroName" type="text" {...register('heroName')} className={`form-control ${errors.firstName ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.firstName?.message}</div>
                 </div>
                 <div className="form-group col">
-                    <label>Last Name</label>
-                    <input name="lastName" type="text" {...register('lastName')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} />
+                    <label>Powers</label>
+                    <input name="powers" type="text" {...register('powers')} className={`form-control ${errors.lastName ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.lastName?.message}</div>
                 </div>
             </div>
             <div className="form-row">
                 <div className="form-group col">
-                    <label>Username</label>
-                    <input name="username" type="text" {...register('username')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
+                    <label>Backstory</label>
+                    <input name="backstory" type="text" {...register('backstory')} className={`form-control ${errors.username ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.email?.message}</div>
                 </div>
-                <div className="form-group col">
+                {/* <div className="form-group col">
                     <label>
                         Password
                         {!isAddMode && <em className="ml-1">(Leave blank to keep the same password)</em>}
                     </label>
                     <input name="password" type="password" {...register('password')} className={`form-control ${errors.password ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.password?.message}</div>
-                </div>
+                </div> */}
             </div>
             <div className="form-group">
                 <button type="submit" disabled={formState.isSubmitting} className="btn btn-primary mr-2">

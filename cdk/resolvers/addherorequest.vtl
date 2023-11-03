@@ -1,0 +1,12 @@
+{
+    "version" : "2017-02-28",
+    "operation" : "PutItem",
+    "key" : {
+        "id" : $util.dynamodb.toDynamoDBJson($utils.autoId()),
+    },
+    "attributeValues" : {
+   		"hero_name" : $util.dynamodb.toDynamoDBJson($context.arguments.hero_name),
+        "powers" : $util.dynamodb.toDynamoDBJson($context.arguments.powers),
+        "backstory" : $util.dynamodb.toDynamoDBJson($context.arguments.backstory),
+    }
+}

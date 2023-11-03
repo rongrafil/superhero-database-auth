@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "firstName": "ron",
+        "lastName": "g",
+        "username": "rmgrafil",
+        "hash": "$2a$10$swgOIMeJimovlH51m1qMNesHnAMYVO8dKs2l22oRtO9T6wA8Hb3lC",
+        "id": 1,
+        "dateCreated": "2023-10-19T08:30:14.271Z",
+        "dateUpdated": "2023-10-19T08:30:14.271Z"
+    }
+]

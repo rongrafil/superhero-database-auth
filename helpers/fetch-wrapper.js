@@ -19,6 +19,30 @@ function get(url) {
     return fetch(url, requestOptions).then(handleResponse);
 }
 
+// function get(url) {
+//     const requestOptions = {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'x-api-key': 'da2-xpd64glcpve67ptf3m4pxf6xhi',
+//       },
+//       body: JSON.stringify({
+//         query: `query allHeroes {
+//           allHeroes(count: 50) {
+//             heroes {
+//               id
+//               hero_name
+//               powers
+//               backstory
+//             }
+//             nextToken
+//           }
+//         }`,
+//       }),
+//     };
+//     return fetch('https://unzs75bpang6xnqtcmdamyzypq.appsync-api.ap-southeast-2.amazonaws.com/graphql', requestOptions).then(handleResponse);
+// }
+
 function post(url, body) {
     const requestOptions = {
         method: 'POST',
@@ -28,6 +52,28 @@ function post(url, body) {
     };
     return fetch(url, requestOptions).then(handleResponse);
 }
+
+// function post(url, body) {
+//     const requestOptions = {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//           'x-api-key': 'da2-xpd64glcpve67ptf3m4pxf6xhi',
+//         },
+//         body: JSON.stringify({
+//           query: `mutation addHero {
+//             addHero(
+//               hero_name: "${body.heroName}"
+//               powers: "${body.powers}"
+//               backstory: "${body.backstory}"
+//             ) {
+//               hero_name
+//             }
+//           }`
+//         }),
+//     };
+//     return fetch('https://unzs75bpang6xnqtcmdamyzypq.appsync-api.ap-southeast-2.amazonaws.com/graphql', requestOptions).then(handleResponse);
+// }
 
 function put(url, body) {
     const requestOptions = {
@@ -75,6 +121,6 @@ function handleResponse(response) {
             return Promise.reject(error);
         }
 
-        return data;
+        return 'allHeroes' in data.data ? data.data.allHeroes.heroes : data
     });
 }
